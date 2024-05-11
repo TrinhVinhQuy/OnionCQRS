@@ -9,6 +9,8 @@ namespace OnionCQRS.Persistence.Data
               : base(options)
         { }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Employee> Employee { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

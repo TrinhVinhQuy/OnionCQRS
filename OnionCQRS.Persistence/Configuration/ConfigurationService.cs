@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OnionCQRS.Domain.Abstracts;
+using OnionCQRS.Persistence.Dapper;
 using OnionCQRS.Persistence.Data;
 using OnionCQRS.Persistence.Repository;
 
@@ -28,6 +29,8 @@ namespace OnionCQRS.Persistence.Configuration
         {
             // Add AddScoped: Sử dụng để chia sẻ cùng một instance trong suốt một yêu cầu HTTP
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddTransient<ISQLQueryHandler, SQLQueryHandler>();
         }
         public static void AddAutoMapper(this IServiceCollection services)
         {

@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-//app.AutoMigration().GetAwaiter().GetResult();
+app.AutoMigration().GetAwaiter().GetResult();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

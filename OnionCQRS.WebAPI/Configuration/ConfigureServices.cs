@@ -17,6 +17,12 @@ namespace OnionCQRS.WebAPI.Configuration
                             .AllowAnyHeader();
                     });
             });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None;
+                options.Secure = CookieSecurePolicy.Always; // Đảm bảo chỉ gửi cookie qua HTTPS
+            });
         }
     }
 }
