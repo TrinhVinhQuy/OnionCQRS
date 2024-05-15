@@ -14,17 +14,19 @@ To know more about how to setup your enviroment visit the [Microsoft .NET Downlo
 
 - ASP.NET 7.0
 - Entity Framework Core 7.0
+- Identity
 - AutoMapper
 - MediatR
 - Swagger UI
 - Dapper
-- CORS (Cross-Origin Resource Sharing)
+- Jwt , CORS (Cross-Origin Resource Sharing)
 
 ## Architecture:
 
 - Onion
 - CQRS (Command Query Responsibility Segregation)
 - Repository
+- Unit Of Work
   
 ## About:
 The OnionCQRS Project was developed by [Trịnh Xuân Vinh Quy](https://www.facebook.com/Vhquy).
