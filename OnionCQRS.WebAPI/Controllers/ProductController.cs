@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnionCQRS.Application.Features.ProductFeatures.Commands;
 using OnionCQRS.Application.Features.ProductFeatures.Queries;
 
 namespace OnionCQRS.WebAPI.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    //[Authorize(Policy = "OnlyAdmin")]
     public class ProductController: BaseApiController
     {
         /// <summary>
