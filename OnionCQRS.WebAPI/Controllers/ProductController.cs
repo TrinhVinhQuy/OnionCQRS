@@ -5,15 +5,15 @@ using OnionCQRS.Application.Features.ProductFeatures.Queries;
 
 namespace OnionCQRS.WebAPI.Controllers
 {
-    [Authorize(Roles = "Admin")]
     //[Authorize(Policy = "OnlyAdmin")]
-    public class ProductController: BaseApiController
+    public class ProductController : BaseApiController
     {
         /// <summary>
         /// Creates a New Product.
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateProductCommand command)
         {

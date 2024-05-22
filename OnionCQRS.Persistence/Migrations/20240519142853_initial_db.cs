@@ -110,8 +110,8 @@ namespace OnionCQRS.Persistence.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -131,8 +131,8 @@ namespace OnionCQRS.Persistence.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -215,11 +215,6 @@ namespace OnionCQRS.Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ApplicationUser",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "Fullname", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "Việt Nam", "SOMECONCURRENCYSTAMP", "user1@example.com", true, "Admin", false, null, "USER1@EXAMPLE.COM", "USER1@EXAMPLE.COM", "AQAAAAEAACcQAAAAEOwYP0jYrs5jNzwpDH0zrFMtPJ6WbPdpAq2f5fs73OTB2v2Y28M9OEm9TfDeIydmQA==", null, false, "SOMESECURITYSTAMP", false, "user1@example.com" });
-
-            migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "Barcode", "Description", "Name", "Rate" },
                 values: new object[,]
@@ -227,20 +222,6 @@ namespace OnionCQRS.Persistence.Migrations
                     { 1, "iphone-13-series", "Là dòng điện thoại nhỏ gọn", "IPhone 13", 10m },
                     { 2, "iphone-14-series", "Là dòng điện thoại sang trọng", "IPhone 14 Promax", 12m }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Role",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "1", null, "Admin", "ADMIN" },
-                    { "2", null, "User", "USER" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserRole",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "1", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

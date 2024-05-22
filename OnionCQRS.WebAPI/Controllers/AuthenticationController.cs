@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnionCQRS.Application.Abstracts;
 using OnionCQRS.Domain.Abstracts;
 using OnionCQRS.Domain.Entities;
 using OnionCQRS.Domain.Model;
@@ -13,25 +14,30 @@ namespace OnionCQRS.WebAPI.Controllers
     public class AuthenticationController : ControllerBase
     {
         private ITokenHandler _tokenHandler;
-        private UserManager<ApplicationUser> _userManager;
+        private IUserService _userService;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager, 
-            ITokenHandler tokenHandler)
+        public AuthenticationController(ITokenHandler tokenHandler, IUserService userService)
         {
-            _userManager = userManager;
             _tokenHandler = tokenHandler;
+            _userService = userService;
         }
 
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] AccountModel accountModel)
         {
-            var user = await _userManager.FindByNameAsync(accountModel.Username);
+            var user = await _userService.CheckLogin(accountModel.Username, accountModel.Password);
+
+            if(user == null)
+            {
+                return BadRequest("The username or password is incorrect.");
+            }
 
             if (!user.EmailConfirmed)
             {
-                return BadRequest("Your account is inactive");
+                return BadRequest("Your account is inactive.");
             }
+
 
             string accessToken = await _tokenHandler.CreateAccessToken(user);
             string refreshToken = await _tokenHandler.CreateRefreshToken(user);

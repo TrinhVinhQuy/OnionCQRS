@@ -9,15 +9,31 @@ namespace OnionCQRS.Application.Services
     {
         private IUnitOfWork _unitOfWork;
         private UserManager<ApplicationUser> _userManager;
-        public UserService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        private SignInManager<ApplicationUser> _signInManager;
+        public UserService(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public Task<ApplicationUser> CheckLogin(string username, string password)
+        public async Task<ApplicationUser> CheckLogin(string username, string password)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, password, true);
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            return user;
         }
     }
 }

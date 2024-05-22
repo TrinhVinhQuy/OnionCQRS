@@ -12,8 +12,8 @@ using OnionCQRS.Persistence.Data;
 namespace OnionCQRS.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240515190528_initial_db")]
-    partial class initial_db
+    [Migration("20240519142857_add_store_procedure")]
+    partial class add_store_procedure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,20 +50,6 @@ namespace OnionCQRS.Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Role", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "2",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -119,12 +105,10 @@ namespace OnionCQRS.Persistence.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -153,13 +137,6 @@ namespace OnionCQRS.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "1",
-                            RoleId = "1"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -168,12 +145,10 @@ namespace OnionCQRS.Persistence.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -254,26 +229,6 @@ namespace OnionCQRS.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("ApplicationUser", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            AccessFailedCount = 0,
-                            Address = "Việt Nam",
-                            ConcurrencyStamp = "SOMECONCURRENCYSTAMP",
-                            Email = "user1@example.com",
-                            EmailConfirmed = true,
-                            Fullname = "Admin",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "USER1@EXAMPLE.COM",
-                            NormalizedUserName = "USER1@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOwYP0jYrs5jNzwpDH0zrFMtPJ6WbPdpAq2f5fs73OTB2v2Y28M9OEm9TfDeIydmQA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "SOMESECURITYSTAMP",
-                            TwoFactorEnabled = false,
-                            UserName = "user1@example.com"
-                        });
                 });
 
             modelBuilder.Entity("OnionCQRS.Domain.Entities.Department", b =>

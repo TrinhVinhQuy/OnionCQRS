@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using OnionCQRS.Application;
 using OnionCQRS.Persistence.Configuration;
@@ -51,7 +50,7 @@ builder.Services.AddSwaggerGen(c =>
                         new string[] { }
                     }
                 });
-    
+
 });
 
 builder.Services.AddCors(options =>
@@ -66,7 +65,7 @@ builder.Services.AddCors(options =>
 });
 var app = builder.Build();
 
-app.AutoMigration().GetAwaiter().GetResult();
+await app.AutoMigration();
 
 app.UseCors(x => x
                .AllowAnyMethod()
@@ -74,6 +73,7 @@ app.UseCors(x => x
                .SetIsOriginAllowed(origin => true) // allow any origin
                .AllowCredentials()); // allow credentials
 
+await app.SeedData(builder.Configuration);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

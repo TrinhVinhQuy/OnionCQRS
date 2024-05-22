@@ -48,32 +48,32 @@ namespace OnionCQRS.Persistence.Data
                     Rate = 12,
                 }
             );
-            // Seed data for IdentityRole
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
-                new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
-            );
-            // Seed data for ApplicationUser
-            builder.Entity<ApplicationUser>().HasData(
-                new ApplicationUser
-                {
-                    Id = "1",
-                    Address = "Việt Nam",
-                    Fullname = "Admin",
-                    UserName = "user1@example.com",
-                    NormalizedUserName = "USER1@EXAMPLE.COM",
-                    Email = "user1@example.com",
-                    NormalizedEmail = "USER1@EXAMPLE.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = "AQAAAAEAACcQAAAAEOwYP0jYrs5jNzwpDH0zrFMtPJ6WbPdpAq2f5fs73OTB2v2Y28M9OEm9TfDeIydmQA==", // Password is "password"
-                    SecurityStamp = "SOMESECURITYSTAMP",
-                    ConcurrencyStamp = "SOMECONCURRENCYSTAMP"
-                }
-            );
-            // Seed data for UserRole
-            builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string> { UserId = "1", RoleId = "1" } // user1@example.com is Admin
-            );
+            //// Seed data for IdentityRole
+            //builder.Entity<IdentityRole>().HasData(
+            //    new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+            //    new IdentityRole { Id = "2", Name = "User", NormalizedName = "USER" }
+            //);
+            //// Seed data for ApplicationUser
+            //builder.Entity<ApplicationUser>().HasData(
+            //    new ApplicationUser
+            //    {
+            //        Id = "1",
+            //        Address = "Việt Nam",
+            //        Fullname = "Admin",
+            //        UserName = "user1@example.com",
+            //        NormalizedUserName = "USER1@EXAMPLE.COM",
+            //        Email = "user1@example.com",
+            //        NormalizedEmail = "USER1@EXAMPLE.COM",
+            //        EmailConfirmed = true,
+            //        PasswordHash = "AQAAAAEAACcQAAAAEOwYP0jYrs5jNzwpDH0zrFMtPJ6WbPdpAq2f5fs73OTB2v2Y28M9OEm9TfDeIydmQA==", // Password is "password"
+            //        SecurityStamp = "SOMESECURITYSTAMP",
+            //        ConcurrencyStamp = "SOMECONCURRENCYSTAMP"
+            //    }
+            //);
+            //// Seed data for UserRole
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string> { UserId = "1", RoleId = "1" } // user1@example.com is Admin
+            //);
         }
     }
 }
